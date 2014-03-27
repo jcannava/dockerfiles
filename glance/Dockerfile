@@ -30,6 +30,8 @@ RUN mkdir -p /etc/glance/ && mv /opt/glance/etc/* /etc/glance/
 RUN mkdir -p /var/log/glance
 
 # CMD /opt/keystone/bin/keystone-all --config-dir=/etc/keystone
+CMD /usr/local/bin/glance-api --config-dir=/etc/glance
+CMD /usr/local/bin/glance-registry --config-dir=/etc/glance
 
 # Keystone service and admin API
 EXPOSE 9191 9292
