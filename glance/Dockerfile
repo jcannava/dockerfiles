@@ -25,7 +25,7 @@ RUN pip install pbr dnspython
 
 # Get keystone source
 RUN git clone https://github.com/openstack/glance -b stable/havana /opt/glance
-RUN cd /opt/glance; git checkout stable/havana && python setup.py install --prefix /usr
+RUN cd /opt/glance; git checkout stable/havana && python setup.py install
 RUN mkdir -p /etc/glance/ && mv /opt/glance/etc/* /etc/glance/
 
 # CMD /opt/keystone/bin/keystone-all --config-dir=/etc/keystone
