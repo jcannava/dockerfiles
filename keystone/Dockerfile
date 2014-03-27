@@ -1,10 +1,18 @@
 # OpenStack Keystone 0.2
 
-# Use phusion/baseimage for proper sysinit
 FROM ubuntu:12.04
 
 # Set correct environment variables.
 ENV HOME /opt
+
+# Generate locale files
+RUN locale-gen en_US.UTF-8
+
+# Export it
+ENV LANG en_US.UTF-8
+
+# Set the env variable DEBIAN_FRONTEND to noninteractive
+ENV DEBIAN_FRONTEND noninteractive
 
 # Setup for keystone
 RUN apt-mark hold initscripts udev plymouth mountall
@@ -15,11 +23,11 @@ RUN pip install pbr dnspython
 
 # Get keystone source
 RUN git clone https://github.com/openstack/keystone -b stable/havana /opt/keystone
-RUN cd /opt/keystone && python setup.py install --prefix /usr
+RUN cd /opt/keystone; git checkout stable/havana && python setup.py install --prefix /usr
 RUN mkdir -p /etc/keystone/ && mv /opt/keystone/etc/* /etc/keystone/
 ADD keystone.conf /etc/keystone/
 
-CMD /opt/keystone/bin/keystone-all
+CMD /opt/keystone/bin/keystone-all --config-dir=/etc/keystone
 
 # Keystone service and admin API
 EXPOSE 5000 35357
