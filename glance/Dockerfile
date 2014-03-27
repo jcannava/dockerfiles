@@ -17,7 +17,9 @@ ENV DEBIAN_FRONTEND noninteractive
 # Setup for keystone
 RUN apt-mark hold initscripts udev plymouth mountall
 RUN apt-get update
-RUN apt-get -y install git-core python-setuptools build-essential python-dev libxslt1-dev libxml2-dev libsqlite3-dev libldap2-dev libsasl2-dev curl
+RUN apt-get -y install git-core python-setuptools build-essential python-dev\
+                       libxslt1-dev libxml2-dev libsqlite3-dev libldap2-dev\
+                       libsasl2-dev curl libffi-dev
 RUN easy_install --upgrade pip
 RUN pip install pbr dnspython
 
@@ -25,7 +27,6 @@ RUN pip install pbr dnspython
 RUN git clone https://github.com/openstack/glance -b stable/havana /opt/glance
 RUN cd /opt/glance; git checkout stable/havana && python setup.py install --prefix /usr
 RUN mkdir -p /etc/glance/ && mv /opt/glance/etc/* /etc/glance/
-# ADD keystone.conf /etc/keystone/
 
 # CMD /opt/keystone/bin/keystone-all --config-dir=/etc/keystone
 
