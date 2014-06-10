@@ -25,7 +25,7 @@ RUN pip install pbr dnspython
 RUN git clone https://github.com/openstack/keystone -b stable/havana /opt/keystone
 RUN cd /opt/keystone; git checkout stable/havana && python setup.py install --prefix /usr
 RUN mkdir -p /etc/keystone/ && mv /opt/keystone/etc/* /etc/keystone/
-ADD keystone.conf /etc/keystone/
+ADD https://raw.githubusercontent.com/jcannava/dockerfiles/master/keystone/keystone.conf /etc/keystone/
 
 CMD /opt/keystone/bin/keystone-all --config-dir=/etc/keystone
 
