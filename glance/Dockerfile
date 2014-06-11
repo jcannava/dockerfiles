@@ -14,7 +14,7 @@ ENV LANG en_US.UTF-8
 # Set the env variable DEBIAN_FRONTEND to noninteractive
 ENV DEBIAN_FRONTEND noninteractive
 
-# Setup for keystone
+# Setup for glance
 RUN apt-mark hold initscripts udev plymouth mountall
 RUN apt-get update
 RUN apt-get -y install git-core python-setuptools build-essential python-dev\
@@ -23,15 +23,14 @@ RUN apt-get -y install git-core python-setuptools build-essential python-dev\
 RUN easy_install --upgrade pip
 RUN pip install pbr dnspython
 
-# Get keystone source
+# Get glance source
 RUN git clone https://github.com/openstack/glance -b stable/havana /opt/glance
 RUN cd /opt/glance; git checkout stable/havana && python setup.py install
 RUN mkdir -p /etc/glance/ && mv /opt/glance/etc/* /etc/glance/
 RUN mkdir -p /var/log/glance
 
-# CMD /opt/keystone/bin/keystone-all --config-dir=/etc/keystone
-CMD /usr/local/bin/glance-api --config-dir=/etc/glance
-CMD /usr/local/bin/glance-registry --config-dir=/etc/glance
+CMD /usr/local/bin/glance-api --config-file=/etc/glance/glance-api.conf
+CMD /usr/local/bin/glance-registry --config-dir=/etc/glance/glance-registry.conf
 
 # Keystone service and admin API
 EXPOSE 9191 9292
