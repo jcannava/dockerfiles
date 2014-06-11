@@ -17,7 +17,7 @@ ENV DEBIAN_FRONTEND noninteractive
 # Setup for keystone
 RUN apt-mark hold initscripts udev plymouth mountall
 RUN apt-get update
-RUN apt-get -y install git-core python-setuptools build-essential python-dev libxslt1-dev libxml2-dev libsqlite3-dev libldap2-dev libsasl2-dev curl
+RUN apt-get -y install git-core python-setuptools build-essential python-dev libxslt1-dev libxml2-dev libsqlite3-dev libldap2-dev libsasl2-dev curl libz-dev
 RUN easy_install --upgrade pip
 RUN pip install pbr dnspython
 
