@@ -30,7 +30,7 @@ RUN mkdir -p /etc/glance/ && mv /opt/glance/etc/* /etc/glance/
 RUN mkdir -p /var/log/glance
 
 CMD /usr/local/bin/glance-api --config-file=/etc/glance/glance-api.conf
-CMD /usr/local/bin/glance-registry --config-dir=/etc/glance/glance-registry.conf
+CMD /usr/local/bin/glance-registry --config-file=/etc/glance/glance-registry.conf
 
 # Keystone service and admin API
 EXPOSE 9191 9292
