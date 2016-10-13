@@ -3,7 +3,10 @@
 FROM ubuntu:14.04
 
 # Set correct environment variables.
-ENV HOME /opt
+ENV HOME /opt/glance
+
+# Set release
+ENV RELEASE stable/newton
 
 # Generate locale files
 RUN locale-gen en_US.UTF-8
@@ -21,8 +24,8 @@ RUN apt-get -y install git-core python-setuptools build-essential python-dev lib
 RUN easy_install --upgrade pip
 
 # Get glance source
-RUN git clone https://github.com/openstack/glance -b stable/newton /opt/glance
-RUN cd /opt/glance; git checkout stable/newton && python setup.py install
+RUN git clone https://github.com/openstack/glance -b $RELEASE $HOME
+RUN cd $HOME; git checkout $RELEASE && python setup.py install
 RUN mkdir -p /etc/glance/
 
 # Clean up APT when done.
