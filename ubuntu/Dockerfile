@@ -14,5 +14,7 @@ ENV DEBIAN_FRONTEND noninteractive
 # Setup
 RUN apt-mark hold initscripts udev plymouth mountall
 RUN apt-get update
-RUN apt-get -y install git-core python-setuptools build-essential python-dev libssl-dev
-RUN easy_install --upgrade pip
+RUN apt-get -y install git-core build-essential python-dev libssl-dev wget
+RUN wget -O /opt/get-pip.py https://bootstrap.pypa.io/get-pip.py
+RUN /usr/bin/python /opt/get-pip.py
+RUN pip install -U pip setuptools
