@@ -5,9 +5,6 @@ galera-node1:
     volumes:
         - /etc/mysql:/opt/etc/galera
         - /var:/opt/galera1
-    links:
-        - galera-node2
-        - galera-node3
 
 galera-node2:
     build: galera/Dockerfile
@@ -18,7 +15,6 @@ galera-node2:
         - /var:/opt/galera2
     links:
         - galera-node1
-        - galera-node3
 
 galera-node3:
     build: galera/Dockerfile
@@ -29,5 +25,4 @@ galera-node3:
         - /var:/opt/galera3
     links:
         - galera-node1
-        - galera-node2
 
