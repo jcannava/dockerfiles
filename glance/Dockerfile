@@ -3,7 +3,7 @@
 FROM ubuntu:14.04
 
 # Set correct environment variables.
-ENV HOME /opt/glance
+ENV HOME $HOME
 
 # Set release
 ENV RELEASE stable/newton
@@ -25,7 +25,7 @@ RUN easy_install --upgrade pip
 
 # Get glance source
 RUN git clone https://github.com/openstack/glance -b $RELEASE $HOME
-RUN pip install -r /opt/glance/requirements.txt
+RUN pip install -r $HOME/requirements.txt
 RUN cd $HOME; git checkout $RELEASE && python setup.py install
 RUN mkdir -p /etc/glance/
 
