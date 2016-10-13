@@ -1,5 +1,5 @@
 galera-node1:
-    build: galera/
+    build: .
     privileged: true
     command: bash -c "mysql_install_db && mysqld --wsrep-new-cluster"
     volumes:
@@ -7,7 +7,7 @@ galera-node1:
         - /opt/galera1:/var/lib/mysql
 
 galera-node2:
-    build: galera/
+    build: .
     privileged: true
     command: bash -c "mysql_install_db && mysqld_safe"
     volumes:
@@ -17,7 +17,7 @@ galera-node2:
         - galera-node1
 
 galera-node3:
-    build: galera/
+    build: .
     privileged: true
     command: bash -c "mysql_install_db && mysqld_safe"
     volumes:
