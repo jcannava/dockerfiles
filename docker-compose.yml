@@ -3,16 +3,16 @@ galera-node1:
     privileged: true
     command: mysqld_safe
     volumes:
-        - /etc/mysql:/opt/etc/galera
-        - /var:/opt/galera1
+        - /opt/etc/mysql.conf.d:/etc/mysql/conf.d
+        - /opt/galera1:/var/lib/mysql
 
 galera-node2:
     build: galera/
     privileged: true
     command: mysqld_safe
     volumes:
-        - /etc/mysql:/opt/etc/galera
-        - /var:/opt/galera2
+        - /opt/etc/mysql.conf.d:/etc/mysql/conf.d
+        - /opt/galera2:/var/lib/mysql
     links:
         - galera-node1
 
@@ -21,8 +21,8 @@ galera-node3:
     privileged: true
     command: mysqld_safe
     volumes:
-        - /etc/mysql:/opt/etc/galera
-        - /var:/opt/galera3
+        - /opt/etc/mysql.conf.d:/etc/mysql/conf.d
+        - /opt/galera3:/var/lib/mysql
     links:
         - galera-node1
 
