@@ -22,7 +22,7 @@ RUN easy_install --upgrade pip
 
 # Get glance source
 RUN git clone https://github.com/openstack/glance -b stable/newton /opt/glance
-RUN cd /opt/glance; git checkout stable/havana && python setup.py install
+RUN cd /opt/glance; git checkout stable/newton && python setup.py install
 RUN mkdir -p /etc/glance/
 
 # Clean up APT when done.
