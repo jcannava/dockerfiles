@@ -1,0 +1,33 @@
+galera-node1:
+    build: galera/Dockerfile
+    privileged: true
+    command: mysqld_safe
+    volumes:
+        - /etc/mysql:/opt/etc/galera
+        - /var:/opt/galera1
+    links:
+        - galera-node2
+        - galera-node3
+
+galera-node2:
+    build: galera/Dockerfile
+    privileged: true
+    command: mysqld_safe
+    volumes:
+        - /etc/mysql:/opt/etc/galera
+        - /var:/opt/galera2
+    links:
+        - galera-node1
+        - galera-node3
+
+galera-node3:
+    build: galera/Dockerfile
+    privileged: true
+    command: mysqld_safe
+    volumes:
+        - /etc/mysql:/opt/etc/galera
+        - /var:/opt/galera3
+    links:
+        - galera-node1
+        - galera-node2
+
