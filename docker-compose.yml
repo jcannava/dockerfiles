@@ -1,5 +1,5 @@
 galera-node1:
-    build: galera/Dockerfile
+    build: ./galera/Dockerfile
     privileged: true
     command: mysqld_safe
     volumes:
@@ -7,7 +7,7 @@ galera-node1:
         - /var:/opt/galera1
 
 galera-node2:
-    build: galera/Dockerfile
+    build: ./galera/Dockerfile
     privileged: true
     command: mysqld_safe
     volumes:
@@ -17,7 +17,7 @@ galera-node2:
         - galera-node1
 
 galera-node3:
-    build: galera/Dockerfile
+    build: ./galera/Dockerfile
     privileged: true
     command: mysqld_safe
     volumes:
