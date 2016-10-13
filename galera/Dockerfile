@@ -15,12 +15,10 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-mark hold initscripts udev plymouth mountall
 RUN apt-get update
 RUN apt-get install -y python-software-properties software-properties-common
-RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db
-RUN add-apt-repository 'deb http://mirror.jmu.edu/pub/mariadb/repo/5.5/ubuntu precise main'
+RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 BC19DDBA
+RUN add-apt-repository 'deb http://releases.galeracluster.com/ubuntu trusty main'
 RUN apt-get update
-RUN apt-get install -y mariadb-galera-server galera rsync
-
-
+RUN apt-get install -y galera-3 galera-arbitrator-3 mysql-wsrep-5.6 rsync lsof
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
