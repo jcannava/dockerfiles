@@ -3,7 +3,10 @@
 FROM ubuntu:14.04
 
 # Set correct environment variables.
-ENV HOME /opt
+ENV HOME /opt/keystone
+
+# Set release
+ENV RELEASE stable/newton
 
 # Generate locale files
 RUN locale-gen en_US.UTF-8
@@ -19,11 +22,11 @@ RUN apt-mark hold initscripts udev plymouth mountall
 RUN apt-get update
 RUN apt-get -y install git-core python-setuptools build-essential python-dev libssl-dev
 RUN easy_install --upgrade pip
-RUN git clone https://git.openstack.org/openstack/keystone -b stable/newton /opt/keystone
-RUN pip install -r /opt/keystone/requirements.txt
 
-# Get keystone source
-RUN cd /opt/keystone; git checkout stable/newton && python setup.py install --prefix /usr
+# Build keystone source
+RUN git clone https://git.openstack.org/openstack/keystone -b $RELEASE $HOME
+RUN pip install -r /opt/keystone/requirements.txt
+RUN cd $HOME; git checkout $RELEASE && python setup.py install --prefix /usr
 RUN mkdir -p /etc/keystone/
 
 # Clean up APT when done.
