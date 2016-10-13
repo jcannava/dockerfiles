@@ -25,6 +25,7 @@ RUN easy_install --upgrade pip
 
 # Get glance source
 RUN git clone https://github.com/openstack/glance -b $RELEASE $HOME
+RUN pip install -r /opt/glance/requirements.txt
 RUN cd $HOME; git checkout $RELEASE && python setup.py install
 RUN mkdir -p /etc/glance/
 
