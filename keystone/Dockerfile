@@ -25,7 +25,7 @@ RUN easy_install --upgrade pip
 
 # Build keystone source
 RUN git clone https://git.openstack.org/openstack/keystone -b $RELEASE $HOME
-RUN pip install -r /opt/keystone/requirements.txt
+RUN pip install -r $HOME/requirements.txt
 RUN cd $HOME; git checkout $RELEASE && python setup.py install --prefix /usr
 RUN mkdir -p /etc/keystone/
 

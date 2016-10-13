@@ -25,7 +25,7 @@ RUN easy_install --upgrade pip
 
 # Get barbican source
 RUN git clone https://github.com/openstack/barbican -b $RELEASE $HOME
-RUN pip install -r /opt/barbican/requirements.txt
+RUN pip install -r $HOME/requirements.txt
 RUN cd $HOME; git checkout $RELEASE && python setup.py install
 RUN mkdir -p /etc/barbican/
 

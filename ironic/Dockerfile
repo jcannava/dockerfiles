@@ -25,7 +25,7 @@ RUN easy_install --upgrade pip
 
 # Get ironic source
 RUN git clone https://github.com/openstack/ironic -b $RELEASE $HOME
-RUN pip install -r /opt/ironic/requirements.txt
+RUN pip install -r $HOME/requirements.txt
 RUN cd $HOME; git checkout $RELEASE && python setup.py install
 RUN mkdir -p /etc/ironic/
 
