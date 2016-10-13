@@ -5,87 +5,57 @@ services:
         build: ./ubuntu
         image: openstack:ubuntu
         container_name: base_image
-        links:
-            - registry:registry
     galera-master:
         build: ./galera
         image: openstack:galera
         container_name: galera_master
-        links:
-            - registry:registry
     galera-node2:
         image: openstack:galera
         container_name: galera-node2
-        links:
-            - registry:registry
     galera-node3:
         image: openstack:galera
         container_name: galera-node3
-        links:
-            - registry:registry
     barbican:
         build: ./barbican
         image: openstack:barbican
         container_name: os-barbican
-        links:
-            - registry:registry
     cinder:
         build: ./cinder
         image: openstack:cinder
         container_name: os-cinder
-        links:
-            - registry:registry
     designate:
         build: ./designate
         image: openstack:designate
         container_name: os-designate
-        links:
-            - registry:registry
     glance:
         build: ./glance
         image: openstack:glance
         container_name: os-glance
-        links:
-            - registry:registry
     heat:
         build: ./heat
         image: openstack:heat
         container_name: os-heat
-        links:
-            - registry:registry
     horizon:
         build: ./horizon
         image: openstack:horizon
         container_name: os-horizon
-        links:
-            - registry:registry
     ironic:
         build: ./ironic
         image: openstack:ironic
         container_name: os-ironic
-        links:
-            - registry:registry
     keystone:
         build: ./keystone
         image: openstack:keystone
         container_name: os-keystone
-        links:
-            - registry:registry
     magnum:
         build: ./magnum
         image: openstack:magnum
         container_name: os-magnum
-        links:
-            - registry:registry
     neutron:
         build: ./neutron
         image: openstack:neutron
         container_name: os-neutron
-        links:
-            - registry:registry
     nova:
         build: ./nova
         image: openstack:nova
         container_name: os-nova
-        links:
-            - registry:registry
