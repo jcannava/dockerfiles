@@ -1,6 +1,10 @@
 version: '2'
 
 services:
+    ubuntu-setup:
+        build: ./ubuntu
+        image: openstack:ubuntu
+        container_name: base_image
     galera-master:
         build: ./galera
         image: openstack:galera
