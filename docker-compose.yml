@@ -1,3 +1,4 @@
+version: '2'
 node1:
     build: .
     privileged: true
@@ -15,7 +16,6 @@ node2:
         - /opt/galera2:/var/lib/mysql
     links:
         - node1
-        - node3
 
 node3:
     build: .
@@ -26,5 +26,3 @@ node3:
         - /opt/galera3:/var/lib/mysql
     links:
         - node1
-        - node2
-
