@@ -17,20 +17,14 @@ ENV DEBIAN_FRONTEND noninteractive
 # Setup for keystone
 RUN apt-mark hold initscripts udev plymouth mountall
 RUN apt-get update
-RUN apt-get -y install git-core python-setuptools build-essential python-dev libxslt1-dev libxml2-dev libsqlite3-dev libldap2-dev libsasl2-dev curl libz-dev
+RUN apt-get -y install git-core python-setuptools build-essential python-dev libssl-dev
 RUN easy_install --upgrade pip
-RUN pip install pbr dnspython
+RUN git clone https://git.openstack.org/openstack/keystone -b stable/newton /opt/keystone
+RUN pip install -r /opt/keystone/requirements.txt
 
 # Get keystone source
-RUN git clone https://github.com/openstack/keystone -b stable/havana /opt/keystone
-RUN cd /opt/keystone; git checkout stable/havana && python setup.py install --prefix /usr
-RUN mkdir -p /etc/keystone/ && mv /opt/keystone/etc/* /etc/keystone/
-ADD https://raw.githubusercontent.com/jcannava/dockerfiles/master/keystone/keystone.conf /etc/keystone/
-
-CMD /opt/keystone/bin/keystone-all --config-dir=/etc/keystone
-
-# Keystone service and admin API
-EXPOSE 5000 35357
+RUN cd /opt/keystone; git checkout stable/newton && python setup.py install --prefix /usr
+RUN mkdir -p /etc/keystone/
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
