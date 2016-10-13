@@ -3,7 +3,7 @@
 FROM ubuntu:14.04
 
 # Set correct environment variables.
-ENV HOME $HOME
+ENV HOME /opt/glance 
 
 # Set release
 ENV RELEASE stable/newton
