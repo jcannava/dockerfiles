@@ -1,7 +1,7 @@
 galera-node1:
     build: galera/
     privileged: true
-    command: mysqld_safe
+    command: mysqld --wsrep-new-cluster
     volumes:
         - /opt/etc/mysql.conf.d:/etc/mysql/conf.d
         - /opt/galera1:/var/lib/mysql
