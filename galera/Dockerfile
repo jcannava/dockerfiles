@@ -20,5 +20,8 @@ RUN add-apt-repository 'deb http://releases.galeracluster.com/ubuntu trusty main
 RUN apt-get update
 RUN apt-get install -y galera-3 galera-arbitrator-3 mysql-wsrep-5.6 rsync lsof
 
+# Bootstrap MariaDB
+RUN service mysql bootstrap
+
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
