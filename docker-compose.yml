@@ -9,12 +9,21 @@ services:
         build: ./galera
         image: openstack:galera
         container_name: galera_master
+        volumes:
+            - /opt/etc/galera:/etc/mysql
+            - /opt/data/galera/master:/var/lib/mysql
     galera-node2:
         image: openstack:galera
         container_name: galera-node2
+        volumes:
+            - /opt/etc/galera:/etc/mysql
+            - /opt/data/galera/node2:/var/lib/mysql
     galera-node3:
         image: openstack:galera
         container_name: galera-node3
+        volumes:
+            - /opt/etc/galera:/etc/mysql
+            - /opt/data/galera/node3:/var/lib/mysql
     puppet-master:
         build: ./puppet-master
         image: openstack:puppet-master
@@ -26,47 +35,74 @@ services:
         build: ./puppet-agent
         image: openstack:puppet-agent
         container_name: puppet-agent
+        volumes:
+            - /sys/fs/cgroup
+            - /run
+            - /var/lib/puppet
+            - /lib64
     barbican:
         build: ./barbican
         image: openstack:barbican
         container_name: os-barbican
+        volumes:
+            - /opt/etc/barbican:/etc/barbican
     cinder:
         build: ./cinder
         image: openstack:cinder
         container_name: os-cinder
+        volumes:
+            - /opt/etc/cinder:/etc/cinder
     designate:
         build: ./designate
         image: openstack:designate
         container_name: os-designate
+        volumes:
+            - /opt/etc/designate:/etc/designate
     glance:
         build: ./glance
         image: openstack:glance
         container_name: os-glance
+        volumes:
+            - /opt/etc/glance:/etc/glance
     heat:
         build: ./heat
         image: openstack:heat
         container_name: os-heat
+        volumes:
+            - /opt/etc/heat:/etc/heat
     horizon:
         build: ./horizon
         image: openstack:horizon
         container_name: os-horizon
+        volumes:
+            - /opt/etc/horizon:/etc/horizon
     ironic:
         build: ./ironic
         image: openstack:ironic
         container_name: os-ironic
+        volumes:
+            - /opt/etc/ironic:/etc/ironic
     keystone:
         build: ./keystone
         image: openstack:keystone
         container_name: os-keystone
+        volumes:
+            - /opt/etc/keystone:/etc/keystone
     magnum:
         build: ./magnum
         image: openstack:magnum
         container_name: os-magnum
+        volumes:
+            - /opt/etc/magnum:/etc/magnum
     neutron:
         build: ./neutron
         image: openstack:neutron
         container_name: os-neutron
+        volumes:
+            - /opt/etc/neutron:/etc/neutron
     nova:
         build: ./nova
         image: openstack:nova
         container_name: os-nova
+        volumes:
+            - /opt/etc/nova:/etc/nova
