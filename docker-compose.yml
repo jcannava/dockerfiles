@@ -19,6 +19,9 @@ services:
         build: ./puppet-master
         image: openstack:puppet-master
         container_name: puppet-master
+        command: service apache2 restart
+        ports:
+            - 3140:3140
     puppet-agent:
         build: ./puppet-agent
         image: openstack:puppet-agent
