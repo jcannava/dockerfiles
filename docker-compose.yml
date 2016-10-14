@@ -15,6 +15,14 @@ services:
     galera-node3:
         image: openstack:galera
         container_name: galera-node3
+    puppet-master:
+        build: ./puppet-master
+        image: openstack:puppet-master
+        container_name: puppet-master
+    puppet-agent:
+        build: ./puppet-agent
+        image: openstack:puppet-agent
+        container_name: puppet-agent
     barbican:
         build: ./barbican
         image: openstack:barbican
