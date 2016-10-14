@@ -32,9 +32,13 @@ services:
         ports:
             - 3140:3140
     puppet-agent:
+        privileged: true
         build: ./puppet-agent
         image: openstack:puppet-agent
         container_name: puppet-agent
+        command: ["/opt/puppetlabs/bin/puppet", "agent", "--verbose", "--onetime", "--no-daemonize", "--summarize" ]
+        links:
+            - puppet-master:puppet
         volumes:
             - /sys/fs/cgroup
             - /run
