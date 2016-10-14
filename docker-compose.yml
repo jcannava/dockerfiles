@@ -19,7 +19,7 @@ services:
         build: ./puppet-master
         image: openstack:puppet-master
         container_name: puppet-master
-        command: service apache2 restart
+        command: apachectl -e DEBUG -DFOREGROUND
         ports:
             - 3140:3140
     puppet-agent:
